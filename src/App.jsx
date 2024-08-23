@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom'
 // pages
 import NewCar from './pages/NewCar/NewCar'
 import Cars from './pages/Cars/Cars'
+import EditCar from './pages/EditCar/EditCar'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -25,6 +26,11 @@ function App() {
     setCars(cars.filter(car => car.id !== carId))
   }
 
+  const handleUpdateCar = updatedCarData => {
+    setCars(cars.map(car => car.id === updatedCarData.id ? updatedCarData : car))
+    navigate('/cars')
+  }
+
   return (
     <>
       <NavBar />
@@ -41,6 +47,10 @@ function App() {
         <Route 
           path='/cars/new' 
           element={<NewCar handleAddCar={handleAddCar} />} 
+        />
+        <Route 
+          path='/cars/:carId/edit' 
+          element={<EditCar handleUpdateCar={handleUpdateCar} />} 
         />
       </Routes>
     </>

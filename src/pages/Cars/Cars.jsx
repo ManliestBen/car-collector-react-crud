@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 const Cars = ({ cars, handleRemoveCar }) => {
   return (
     <>
@@ -8,7 +10,17 @@ const Cars = ({ cars, handleRemoveCar }) => {
             <h2>{car.year}</h2>
             <h2>{car.make}</h2>
             <h2>{car.model}</h2>
-            <button onClick={() => handleRemoveCar(car.id)}>🗑️</button>
+            <div>
+              <button onClick={() => handleRemoveCar(car.id)}>🗑️</button>
+              <Link 
+                to={`/cars/${car.id}/edit`} 
+                className="edit-button"
+                state={car}
+              >
+                ✏️
+              </Link>
+
+            </div>
           </div>
         )}
       </div>
