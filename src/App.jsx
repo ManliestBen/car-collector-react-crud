@@ -4,6 +4,7 @@ import { Routes, Route } from 'react-router-dom'
 
 // pages
 import NewCar from './pages/NewCar/NewCar'
+import Cars from './pages/Cars/Cars'
 
 // components
 import NavBar from './components/NavBar/NavBar'
@@ -12,14 +13,21 @@ import NavBar from './components/NavBar/NavBar'
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [cars, setCars] = useState([])
+
+  const handleAddCar = carData => {
+    setCars([...cars, carData])
+  }
 
   return (
     <>
       <NavBar />
       <Routes>
-        {/* <Route path='/cars' /> */}
-        <Route path='/cars/new' element={<NewCar />} />
+        <Route path='/cars' element={<Cars cars={cars} />}/>
+        <Route 
+          path='/cars/new' 
+          element={<NewCar handleAddCar={handleAddCar} />} 
+        />
       </Routes>
     </>
   )
